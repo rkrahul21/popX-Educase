@@ -10,6 +10,10 @@ export default function ProfileCard() {
   const [isEditing, setIsEditing] = useState(false);
   const [bio, setBio] = useState(user?.bio || "Full Stack Engineer | React | Node.js | Tailwind CSS. Dedicated to building performant, accessible web tools from the ground up. Whether it's crafting responsive frontends or designing robust APIs, I focus on clean code and user-centric design. Currently exploring the intersection of EdTech and scalable system design.");
 
+  const maleAvatar = "https://imgv3.fotor.com/images/homepage-feature-card/fotor-3d-avatar.jpg";
+  const femaleAvatar = "https://imgv3.fotor.com/images/homepage-feature-card/fotor-cartoon-avatar.jpg";
+  const avatarUrl = user?.gender === "female" ? femaleAvatar : user?.gender === "male" ? maleAvatar : "https://pravatar.cc";
+
   const handleSave = () => {
     const updatedUser = { ...user, bio };
     localStorage.setItem("user", JSON.stringify(updatedUser));
@@ -34,7 +38,14 @@ export default function ProfileCard() {
         <div className="flex flex-1 flex-col bg-[#F7F8F9] p-4">
          
           <div className="flex items-center gap-4 mb-4">
-            <img src="https://pravatar.cc" alt="Profile" className="h-16 w-16 rounded-full object-cover" />
+            <img
+              src={avatarUrl}
+              alt="Profile"
+              onError={(e) => {
+                e.currentTarget.src = "https://pravatar.cc";
+              }}
+              className="h-16 w-16 rounded-full object-cover"
+            />
             <div>
               <p className="font-['Lato'] text-[15px] font-bold text-[#1D1D1D]">{user?.fullName || "Guest"}</p>
               <p className="font-['Lato'] text-sm text-[#777]">{user?.email}</p>

@@ -23,6 +23,7 @@ export default function Signup() {
       email: "",
       password: "",
       company: "",
+      gender: "",
       agency: "",
     },
   });
@@ -136,6 +137,32 @@ export default function Signup() {
                 size="small"
                 fullWidth
               />
+            )}
+          />
+
+          <Controller
+            name="gender"
+            control={control}
+            rules={{ required: "Please select gender" }}
+            render={({ field }) => (
+              <FormControl error={!!errors.gender} component="fieldset">
+                <FormLabel className="!text-[13px] !font-semibold !text-black mb-1">
+                  Gender<span className="text-red-600">*</span>
+                </FormLabel>
+                <RadioGroup row {...field}>
+                  <FormControlLabel
+                    value="male"
+                    control={<Radio size="small" sx={{ '&.Mui-checked': { color: '#6C2EFF' } }} />}
+                    label={<span className="text-sm">Male</span>}
+                  />
+                  <FormControlLabel
+                    value="female"
+                    control={<Radio size="small" sx={{ '&.Mui-checked': { color: '#6C2EFF' } }} />}
+                    label={<span className="text-sm">Female</span>}
+                  />
+                </RadioGroup>
+                {errors.gender && <p className="text-xs text-[#d32f2f]">{errors.gender.message}</p>}
+              </FormControl>
             )}
           />
 
